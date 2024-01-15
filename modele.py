@@ -6,7 +6,14 @@ class JeuModel:
     def __init__(self):
         self.joueur_position = [50, 50]
         self.obstacles = []
+        self.ecran = 1  # 1 = démarrage, 2 = selection niveaux, 3 = lvl 1, 4 = lvl 2
         self.score = 0
+
+    def get_ecran(self):
+        return self.ecran
+
+    def set_ecran(self, value):
+        self.ecran = value
 
     def ajouter_obstacle(self):
         # Ajoute un nouvel obstacle à une position aléatoire
