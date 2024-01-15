@@ -4,10 +4,25 @@ import random
 
 class JeuModel:
     def __init__(self):
+        self.LVL_MAX = 2
+
         self.joueur_position = [50, 50]
         self.obstacles = []
         self.ecran = 1  # 1 = démarrage, 2 = selection niveaux, 3 = lvl 1, 4 = lvl 2
+        self.selected_lvl = 1  # variable de selection de niveau
         self.score = 0
+
+    # setter and getter
+    def get_selected_lvl(self):
+        return self.selected_lvl
+
+    def set_selected_lvl(self, value):
+        if value > self.LVL_MAX:
+            self.selected_lvl = 1
+        elif value < 1:
+            self.selected_lvl = self.LVL_MAX
+        else:
+            self.selected_lvl = value
 
     def get_ecran(self):
         return self.ecran
@@ -15,6 +30,7 @@ class JeuModel:
     def set_ecran(self, value):
         self.ecran = value
 
+    # fonction utiles au jeu
     def ajouter_obstacle(self):
         # Ajoute un nouvel obstacle à une position aléatoire
         x = random.randint(0, 600)
