@@ -39,6 +39,12 @@ class JeuVue:
 
     def afficher_screen_2(self, modele):
         self.ecran.blit(self.fond, (0, 0))
+        pygame.draw.rect(
+            self.ecran,
+            (0, 128, 255),
+            pygame.Rect(modele.joueur_position[0], modele.joueur_position[1], 50, 50),
+        )
+        pygame.display.flip()
 
     # def afficher(self, modele):
     #     self.ecran.blit(self.fond, (0, 0))

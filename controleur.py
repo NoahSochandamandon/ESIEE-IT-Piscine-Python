@@ -11,6 +11,7 @@ class JeuControleur:
             pygame.K_RIGHT: False,
             pygame.K_UP: False,
             pygame.K_DOWN: False,
+            pygame.K_SPACE: False,
         }
 
     def traiter_evenements(self):
@@ -35,6 +36,8 @@ class JeuControleur:
                 self.modele.deplacer_joueur(0, -10)
             if self.touche_enfoncee[pygame.K_DOWN]:
                 self.modele.deplacer_joueur(0, 10)
+            if self.touche_enfoncee[pygame.K_SPACE] and self.modele.get_ecran() == 1:
+                self.modele.set_ecran(2)
 
             self.modele.mise_a_jour()
 
