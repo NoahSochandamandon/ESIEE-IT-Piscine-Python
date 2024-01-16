@@ -5,7 +5,7 @@ class Personnage:
     def __init__(self):
         self.x = 100  # Position horizontale initiale
         self.y = 300  # Position verticale initiale (au sol, par exemple)
-        self.vitesse_x = 0  # Vitesse horizontale
+        self.vitesse_x = 2  # Vitesse horizontale
         self.vitesse_y = 0  # Vitesse verticale
         self.en_saut = False
         self.hauteur_saut = 10  # Hauteur maximale du saut

@@ -38,15 +38,21 @@ class JeuControleur:
     def jouer(self):
         while self.play:
             self.traiter_evenements()
+
             # event de jeu
             if self.touche_enfoncee[pygame.K_LEFT]:
-                self.modele.deplacer_joueur(-10, 0)
+                self.modele.perso.set_vitesse_x(-15)
             if self.touche_enfoncee[pygame.K_RIGHT]:
-                self.modele.deplacer_joueur(10, 0)
-            if self.touche_enfoncee[pygame.K_UP]:
-                self.modele.deplacer_joueur(0, -10)
-            if self.touche_enfoncee[pygame.K_DOWN]:
-                self.modele.deplacer_joueur(0, 10)
+                self.modele.perso.set_vitesse_x(15)
+            else:
+                self.modele.perso.set_vitesse_x(0)
+
+            if not self.modele.perso.get_en_saut():
+                if self.touche_enfoncee[pygame.K_UP]:
+                    self.modele.perso.set_en_saut(True)
+                    self.modele.perso.set_vitesse_saut(
+                        self.modele.perso.get_hauteur_saut()
+                    )
 
             self.modele.mise_a_jour()
 

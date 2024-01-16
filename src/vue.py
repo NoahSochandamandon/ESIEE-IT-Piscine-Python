@@ -25,6 +25,7 @@ class JeuVue:
     def set_clock(self, value):
         self.clock = value
 
+    # vue des menus
     def afficher_screen_1(self, modele):
         self.ecran.blit(self.fond, (0, 0))
         pygame.display.set_caption(GAME_NAME)
@@ -68,6 +69,7 @@ class JeuVue:
 
         pygame.display.flip()
 
+    # vue des niveau in game
     def afficher_screen_3(self, modele):
         self.fond = pygame.transform.scale(
             pygame.image.load("./sprites/background/wall2.png"), (LONGUEUR, LARGEUR)
@@ -77,7 +79,7 @@ class JeuVue:
         self.ecran.fill((0, 0, 0))  # Effacer l'écran
         self.ecran.blit(
             pygame.transform.scale(
-                pygame.image.load(modele.perso.get_sprite_actuel()), (50, 50)
+                pygame.image.load(modele.perso.get_sprite_actuel()), (100, 100)
             ).convert_alpha(),
             (modele.perso.get_x(), modele.perso.get_y()),
         )
