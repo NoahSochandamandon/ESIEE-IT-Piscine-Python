@@ -1,102 +1,38 @@
 import pygame
 
 
-class Personnage:
-    def __init__(self):
-        self.x = 100  # Position horizontale initiale
-        self.y = 300  # Position verticale initiale (au sol, par exemple)
-        self.vitesse_x = 2  # Vitesse horizontale
-        self.vitesse_y = 0  # Vitesse verticale
-        self.en_saut = False
-        self.hauteur_saut = 10  # Hauteur maximale du saut
-        self.vitesse_saut = self.hauteur_saut  # Vitesse initiale du saut
-        self.gravite = 1  # Force de gravité
-        self.sprite_actuel = "./sprites/skin/skin_1.png"
+class Player(pygame.sprite.Sprite):
+    def __init__(self, pos):
+        super().__init__()
+        self.image = pygame.Surface((32, 64))
+        self.image.fill("red")
+        self.rect = self.image.get_rect(topleft=pos)
+        self.direction = pygame.math.Vector2(0, 0)
 
-    # setter and getter
-    def get_x(self):
-        return self.x
+        # Player movement
+        self.speed = 8
+        self.gravity = 0.8
+        self.jump_speed = -16
 
-    def set_x(self, value):
-        self.x = value
+    def get_input(self):
+        keys = pygame.key.get_pressed()
 
-    def get_y(self):
-        return self.y
-
-    def set_y(self, value):
-        self.y = value
-
-    def get_vitesse_x(self):
-        return self.vitesse_x
-
-    def set_vitesse_x(self, value):
-        self.vitesse_x = value
-
-    def get_vitesse_y(self):
-        return self.vitesse_y
-
-    def set_vitesse_y(self, value):
-        self.vitesse_y = value
-
-    def get_en_saut(self):
-        return self.en_saut
-
-    def set_en_saut(self, value):
-        self.en_saut = value
-
-    def get_hauteur_saut(self):
-        return self.hauteur_saut
-
-    def set_hauteur_saut(self, value):
-        self.hauteur_saut = value
-
-    def get_vitesse_saut(self):
-        return self.vitesse_saut
-
-    def set_vitesse_saut(self, value):
-        self.vitesse_saut = value
-
-    def get_gravite(self):
-        return self.gravite
-
-    def set_gravite(self, value):
-        self.gravite = value
-
-    def get_sprite_actuel(self):
-        return self.sprite_actuel
-
-    def set_sprite_actuel(self, value):
-        self.sprite_actuel = value
-
-    def mise_a_jour(self):
-        # Mise à jour de la position horizontale
-        self.x += self.vitesse_x
-
-        # Si le personnage est en train de sauter
-        if self.en_saut:
-            # Calculer la vitesse de saut et la position y
-            if self.vitesse_saut >= -self.hauteur_saut:
-                neg = 1
-                if self.vitesse_saut < 0:
-                    neg = -1
-                self.y -= (self.vitesse_saut**2) * 0.5 * neg
-                self.vitesse_saut -= self.gravite
-            else:
-                # Fin du saut
-                self.en_saut = False
-                self.vitesse_saut = self.hauteur_saut
-
-        # Appliquer la gravité si le personnage n'est pas sur le sol
-        self.y += self.vitesse_y
-        if self.y > 300:  # Supposons que 300 est la position du sol
-            self.y = 300
-            self.vitesse_y = 0
-
-        # S'assurer que le personnage ne traverse pas le sol
-        if self.y < 300:
-            self.vitesse_y += self.gravite
+        if keys[pygame.K_RIGHT]:
+            self.direction.x = 1
+        elif keys[pygame.K_LEFT]:
+            self.direction.x = -1
         else:
-            self.vitesse_y = 0
-            if not self.en_saut:
-                # Réinitialiser la vitesse de saut si le personnage est sur le sol
-                self.vitesse_saut = self.hauteur_saut
+            self.direction.x = 0
+
+        if keys[pygame.K_SPACE]:
+            self.jump()
+
+    def apply_gravity(self):
+        self.direction.y += self.gravity
+        self.rect.y += self.direction.y
+
+    def jump(self):
+        self.direction.y = self.jump_speed
+
+    def update(self):
+        self.get_input()

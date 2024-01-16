@@ -1,29 +1,25 @@
 import pygame
+from level import Niveau
+from map.map_1 import *
+from modele import LONGUEUR, LARGEUR, FONT, GAME_NAME
 import os
 
-FPS = 60
-LONGUEUR = 1280
-LARGEUR = 720
-FONT = "./font/8bit16.ttf"
-GAME_NAME = "Plateformer ESIEE-IT"
+# LONGUEUR = 1280
+# LARGEUR = 704
+# FONT = "./font/8bit16.ttf"
+# GAME_NAME = "Plateformer ESIEE-IT"
 
 
 class JeuVue:
     def __init__(self):
         pygame.init()
-        self.clock = pygame.time.Clock()
         self.ecran = pygame.display.set_mode((LONGUEUR, LARGEUR))
         self.fond = pygame.transform.scale(
             pygame.image.load("./sprites/background/wall.png"), (LONGUEUR, LARGEUR)
         )
         self.police = pygame.font.Font(FONT, 36)
         self.couleur_texte = (255, 255, 255)
-
-    def get_clock(self):
-        return self.clock
-
-    def set_clock(self, value):
-        self.clock = value
+        self.level_1 = Niveau(carte_niveau_1, self.ecran)
 
     # vue des menus
     def afficher_screen_1(self, modele):
@@ -71,41 +67,13 @@ class JeuVue:
 
     # vue des niveau in game
     def afficher_screen_3(self, modele):
-        self.fond = pygame.transform.scale(
-            pygame.image.load("./sprites/background/wall2.png"), (LONGUEUR, LARGEUR)
-        )
-        self.ecran.blit(self.fond, (0, 0))
+        self.ecran.fill("black")
+        self.level_1.run()
 
-        self.ecran.fill((0, 0, 0))  # Effacer l'écran
-        self.ecran.blit(
-            pygame.transform.scale(
-                pygame.image.load(modele.perso.get_sprite_actuel()), (100, 100)
-            ).convert_alpha(),
-            (modele.perso.get_x(), modele.perso.get_y()),
-        )
-
-        pygame.display.flip()
+        pygame.display.update()
+        # self.clock.tick(60)
 
     def creer_text_box(self, texte, x, y, largeur, hauteur):
         rect = pygame.Rect(x, y, largeur, hauteur)
         text_surface = self.police.render(texte, True, self.couleur_texte)
         return rect, text_surface
-
-    # def afficher(self, modele):
-    #     self.ecran.blit(self.fond, (0, 0))
-    #     # Affiche le joueur
-    #     pygame.draw.rect(
-    #         self.ecran,
-    #         (0, 128, 255),
-    #         pygame.Rect(modele.joueur_position[0], modele.joueur_position[1], 50, 50),
-    #     )
-    #     # Affiche les obstacles
-    #     for obstacle in modele.obstacles:
-    #         pygame.draw.rect(
-    #             self.ecran, (255, 0, 0), pygame.Rect(obstacle[0], obstacle[1], 20, 20)
-    #         )
-    #     # Affiche le score
-    #     font = pygame.font.SysFont(None, 55)
-    #     score_text = font.render(f"Score: {modele.score}", True, (0, 0, 0))
-    #     self.ecran.blit(score_text, (10, 10))
-    #     pygame.display.flip()

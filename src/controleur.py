@@ -13,6 +13,7 @@ class JeuControleur:
             pygame.K_DOWN: False,
             pygame.K_SPACE: False,
         }
+        self.clock = pygame.time.Clock()
 
     def traiter_evenements(self):
         for event in pygame.event.get():
@@ -40,19 +41,28 @@ class JeuControleur:
             self.traiter_evenements()
 
             # event de jeu
-            if self.touche_enfoncee[pygame.K_LEFT]:
-                self.modele.perso.set_vitesse_x(-15)
-            if self.touche_enfoncee[pygame.K_RIGHT]:
-                self.modele.perso.set_vitesse_x(15)
-            else:
-                self.modele.perso.set_vitesse_x(0)
+            # if self.touche_enfoncee[pygame.K_LEFT]:
+            #     self.modele.perso.set_vitesse_x(-15)
+            # if self.touche_enfoncee[pygame.K_RIGHT]:
+            #     self.modele.perso.set_vitesse_x(15)
+            # else:
+            #     self.modele.perso.set_vitesse_x(0)
 
-            if not self.modele.perso.get_en_saut():
-                if self.touche_enfoncee[pygame.K_UP]:
-                    self.modele.perso.set_en_saut(True)
-                    self.modele.perso.set_vitesse_saut(
-                        self.modele.perso.get_hauteur_saut()
-                    )
+            # if not self.modele.perso.get_en_saut():
+            #     if self.touche_enfoncee[pygame.K_UP]:
+            #         self.modele.perso.set_en_saut(True)
+            #         self.modele.perso.set_vitesse_saut(
+            #             self.modele.perso.get_hauteur_saut()
+            #         )
+
+            # if self.modele.get_ecran() >= 3 and self.touche_enfoncee[pygame.K_RIGHT]:
+            #     return
+            # if self.modele.get_ecran() >= 3 and self.touche_enfoncee[pygame.K_LEFT]:
+            #     return
+            # else:
+            #     return
+            # if self.modele.get_ecran() >= 3 and self.touche_enfoncee[pygame.K_SPACE]:
+            #     return
 
             self.modele.mise_a_jour()
 
@@ -64,4 +74,6 @@ class JeuControleur:
                 self.vue.afficher_screen_3(self.modele)
             elif self.modele.get_ecran() == 4:
                 self.vue.afficher_screen_3(self.modele)
-            self.vue.set_clock(60)
+
+            pygame.display.update()
+            self.clock.tick(60)
