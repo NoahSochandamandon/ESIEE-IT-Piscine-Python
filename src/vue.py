@@ -68,6 +68,22 @@ class JeuVue:
 
         pygame.display.flip()
 
+    def afficher_screen_3(self, modele):
+        self.fond = pygame.transform.scale(
+            pygame.image.load("./sprites/background/wall2.png"), (LONGUEUR, LARGEUR)
+        )
+        self.ecran.blit(self.fond, (0, 0))
+
+        self.ecran.fill((0, 0, 0))  # Effacer l'écran
+        self.ecran.blit(
+            pygame.transform.scale(
+                pygame.image.load(modele.perso.get_sprite_actuel()), (50, 50)
+            ).convert_alpha(),
+            (modele.perso.get_x(), modele.perso.get_y()),
+        )
+
+        pygame.display.flip()
+
     def creer_text_box(self, texte, x, y, largeur, hauteur):
         rect = pygame.Rect(x, y, largeur, hauteur)
         text_surface = self.police.render(texte, True, self.couleur_texte)

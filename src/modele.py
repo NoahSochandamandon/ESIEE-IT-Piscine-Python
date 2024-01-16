@@ -3,7 +3,8 @@ import random
 
 
 class JeuModel:
-    def __init__(self):
+    def __init__(self, perso):
+        self.perso = perso
         self.LVL_MAX = 2
 
         self.joueur_position = [50, 50]
