@@ -1,7 +1,7 @@
 import pygame, sys
-from settings import *
-from tiles import Tuile
-from level import Niveau
+from Tuto.Tuto_niveaux.settings import *
+from Tuto.Tuto_niveaux.tiles import Tuile
+from Tuto.Tuto_niveaux.level import Niveau
 
 # Config fenêtre
 pygame.init()
