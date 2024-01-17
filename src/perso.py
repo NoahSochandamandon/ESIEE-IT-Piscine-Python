@@ -95,3 +95,9 @@ class Player(pygame.sprite.Sprite):
         self.get_input()
         self.get_status()
         self.animate()
+
+        # Ajout la vérif de la direction pour rotationner le sprite
+        if self.direction.x < 0:  # déplace vers la gauche --> flip gauche
+            self.image = pygame.transform.flip(self.image, True, False)
+        elif self.direction.x > 0:  # déplace vers la droite --> aucun flip
+            self.image = pygame.transform.flip(self.image, False, False)
