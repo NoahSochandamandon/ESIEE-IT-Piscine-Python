@@ -41,7 +41,7 @@ class Niveau:
         if player_x < LONGUEUR / 4 and direction_x < 0:
             self.world_shift = 8
             player.speed = 0
-        elif player_x > LONGUEUR - (LONGUEUR / 4) and direction_x > 0:
+        elif player_x > LONGUEUR / 2.2 and direction_x > 0:
             self.world_shift = -8
             player.speed = 0
         else:
