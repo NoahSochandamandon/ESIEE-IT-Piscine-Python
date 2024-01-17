@@ -13,8 +13,9 @@ class JeuModel:
         self.LVL_MAX = 2
         self.vivant = False
 
-        self.ecran = 1  # 1 = démarrage, 2 = selection niveaux, 3 = lvl 1, 4 = lvl 2
+        self.ecran = 1  # 1 = démarrage, 2 = selection niveaux, 3 = mort, 4 = victoire, 5 = lvl 1, 6 = lvl 2
         self.selected_lvl = 1  # variable de selection de niveau
+        self.selected_death_box = 1
         self.score = 0
 
     # setter and getter
@@ -28,6 +29,17 @@ class JeuModel:
             self.selected_lvl = self.LVL_MAX
         else:
             self.selected_lvl = value
+
+    def get_selected_death_box(self):
+        return self.selected_death_box
+
+    def set_selected_death_box(self, value):
+        if value > self.LVL_MAX:
+            self.selected_death_box = 1
+        elif value < 1:
+            self.selected_death_box = 2
+        else:
+            self.selected_death_box = value
 
     def get_ecran(self):
         return self.ecran

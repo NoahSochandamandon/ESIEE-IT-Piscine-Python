@@ -19,10 +19,10 @@ class JeuControleur:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.play = False
-            elif event.type == pygame.KEYDOWN and (self.modele.get_ecran() > 2):
+            elif event.type == pygame.KEYDOWN and (self.modele.get_ecran() > 4):
                 if event.key in self.touche_enfoncee:
                     self.touche_enfoncee[event.key] = True
-            elif event.type == pygame.KEYUP and (self.modele.get_ecran() > 2):
+            elif event.type == pygame.KEYUP and (self.modele.get_ecran() > 4):
                 if event.key in self.touche_enfoncee:
                     self.touche_enfoncee[event.key] = False
             # event des menus
@@ -32,8 +32,28 @@ class JeuControleur:
                 if event.key == pygame.K_DOWN and self.modele.get_ecran() == 2:
                     self.modele.set_selected_lvl(self.modele.get_selected_lvl() + 1)
                 if event.key == pygame.K_SPACE and self.modele.get_ecran() == 2:
-                    self.modele.set_ecran(self.modele.get_selected_lvl() + 2)
+                    self.modele.set_ecran(self.modele.get_selected_lvl() + 4)
                 if event.key == pygame.K_SPACE and self.modele.get_ecran() == 1:
+                    self.modele.set_ecran(2)
+                if event.key == pygame.K_UP and self.modele.get_ecran() == 3:
+                    self.modele.set_selected_death_box(
+                        self.modele.get_selected_death_box() - 1
+                    )
+                if event.key == pygame.K_DOWN and self.modele.get_ecran() == 3:
+                    self.modele.set_selected_death_box(
+                        self.modele.get_selected_death_box() + 1
+                    )
+                if (
+                    event.key == pygame.K_SPACE
+                    and self.modele.get_ecran() == 3
+                    and self.modele.get_selected_death_box() == 1
+                ):
+                    self.modele.set_ecran(self.modele.get_selected_lvl() + 4)
+                if (
+                    event.key == pygame.K_SPACE
+                    and self.modele.get_ecran() == 3
+                    and self.modele.get_selected_death_box() == 2
+                ):
                     self.modele.set_ecran(2)
 
     def jouer(self):
@@ -71,9 +91,14 @@ class JeuControleur:
             elif self.modele.get_ecran() == 2:
                 self.vue.afficher_screen_2(self.modele)
             elif self.modele.get_ecran() == 3:
-                self.vue.afficher_screen_3(self.modele)
+                self.vue.afficher_screen_death(self.modele)
             elif self.modele.get_ecran() == 4:
+                self.vue.afficher_screen_2(self.modele)
+            elif self.modele.get_ecran() == 5:
                 self.vue.afficher_screen_3(self.modele)
+            elif self.modele.get_ecran() == 6:
+                self.vue.afficher_screen_3(self.modele)
+            # print(self.modele.get_ecran())
 
             pygame.display.update()
             self.clock.tick(60)
