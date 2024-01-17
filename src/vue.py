@@ -1,6 +1,6 @@
 import pygame
 from level import Niveau
-from map.map_1 import *
+from map.map import *
 from modele import LONGUEUR, LARGEUR, FONT, GAME_NAME
 import os
 
@@ -63,6 +63,22 @@ class JeuVue:
         self.ecran.fill("black")
         if not modele.get_vivant():
             self.initialiser_niveau(carte_niveau_1)
+            modele.set_vivant(True)
+
+        if not self.level.get_player_life():
+            modele.set_ecran(3)
+            modele.set_vivant(False)
+
+        if self.level.get_victory():
+            modele.set_ecran(4)
+            modele.set_vivant(False)
+
+        self.level.run()
+
+    def afficher_screen_4(self, modele):
+        self.ecran.fill("black")
+        if not modele.get_vivant():
+            self.initialiser_niveau(carte_niveau_2)
             modele.set_vivant(True)
 
         if not self.level.get_player_life():

@@ -1,6 +1,6 @@
 import pygame
 from level import Niveau
-from map.map_1 import *
+from map.map import *
 from modele import LONGUEUR, LARGEUR, FONT, GAME_NAME
 import os
 from pygame.mixer import *
@@ -13,9 +13,8 @@ from pygame.mixer import *
 
 class JeuVue:
     def __init__(self):
-        
         pygame.init()
-        
+
         self.ecran = pygame.display.set_mode((LONGUEUR, LARGEUR))
         self.fond = pygame.transform.scale(
             pygame.image.load("./sprites/background/wall.png"), (LONGUEUR, LARGEUR)
@@ -23,18 +22,15 @@ class JeuVue:
         self.police = pygame.font.Font(FONT, 36)
         self.couleur_texte = (255, 255, 255)
         self.level_1 = Niveau(carte_niveau_1, self.ecran)
-        
+
         pygame.mixer.init()
-        
-       
-        
+
         pygame.mixer.music.load("Espada.mp3")
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.5)
-     
 
         pygame.display.flip()
-         
+
     # vue des menus
     def afficher_screen_1(self, modele):
         self.ecran.blit(self.fond, (0, 0))

@@ -121,7 +121,7 @@ class JeuControleur:
             elif self.modele.get_ecran() == 5:
                 self.vue.afficher_screen_3(self.modele)
             elif self.modele.get_ecran() == 6:
-                self.vue.afficher_screen_3(self.modele)
+                self.vue.afficher_screen_4(self.modele)
             # print(self.modele.get_ecran())
 
             pygame.display.update()
