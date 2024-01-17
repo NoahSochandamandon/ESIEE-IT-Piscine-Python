@@ -1,3 +1,4 @@
+import sys
 import pygame
 
 
@@ -28,12 +29,21 @@ class JeuControleur:
 
             # event des menus
             elif event.type == pygame.KEYDOWN:
+                # écran de selection des niveaux
                 if event.key == pygame.K_UP and self.modele.get_ecran() == 2:
                     self.modele.set_selected_lvl(self.modele.get_selected_lvl() - 1)
                 if event.key == pygame.K_DOWN and self.modele.get_ecran() == 2:
                     self.modele.set_selected_lvl(self.modele.get_selected_lvl() + 1)
                 if event.key == pygame.K_SPACE and self.modele.get_ecran() == 2:
                     self.modele.set_ecran(self.modele.get_selected_lvl() + 4)
+                if (
+                    event.key == pygame.K_SPACE
+                    and self.modele.get_ecran() == 2
+                    and self.modele.get_selected_lvl() == 3
+                ):
+                    self.play = False
+
+                # écran de démarrage
                 if event.key == pygame.K_SPACE and self.modele.get_ecran() == 1:
                     self.modele.set_ecran(2)
 
@@ -58,6 +68,12 @@ class JeuControleur:
                     and self.modele.get_selected_death_box() == 2
                 ):
                     self.modele.set_ecran(2)
+                if (
+                    event.key == pygame.K_SPACE
+                    and self.modele.get_ecran() == 3
+                    and self.modele.get_selected_death_box() == 3
+                ):
+                    self.play = False
 
                 # ecran de victoire
                 if event.key == pygame.K_UP and self.modele.get_ecran() == 4:
@@ -80,6 +96,12 @@ class JeuControleur:
                     and self.modele.get_selected_death_box() == 2
                 ):
                     self.modele.set_ecran(2)
+                if (
+                    event.key == pygame.K_SPACE
+                    and self.modele.get_ecran() == 4
+                    and self.modele.get_selected_death_box() == 3
+                ):
+                    self.play = False
 
     def jouer(self):
         while self.play:
@@ -104,3 +126,5 @@ class JeuControleur:
 
             pygame.display.update()
             self.clock.tick(60)
+        pygame.quit()
+        sys.exit()

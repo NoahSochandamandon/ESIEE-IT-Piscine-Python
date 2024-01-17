@@ -36,11 +36,11 @@ class JeuVue:
             pygame.image.load("./sprites/background/wall2.png"), (LONGUEUR, LARGEUR)
         )
         self.ecran.blit(self.fond, (0, 0))
-        pygame.display.set_caption(GAME_NAME)
 
         text_boxes = [
             self.creer_text_box("niveau 1", LONGUEUR // 2, LARGEUR // 2 - 50, 300, 60),
             self.creer_text_box("niveau 2", LONGUEUR // 2, LARGEUR // 2 + 50, 300, 60),
+            self.creer_text_box("Quitter", LONGUEUR // 2, LARGEUR // 2 + 250, 250, 60),
         ]
 
         for index, (rect, text_surface) in enumerate(text_boxes):
@@ -109,6 +109,7 @@ class JeuVue:
                 600,
                 60,
             ),
+            self.creer_text_box("Quitter", LONGUEUR // 2, LARGEUR // 2 + 250, 250, 60),
         ]
 
         for index, (rect, text_surface) in enumerate(text_boxes):
@@ -148,6 +149,7 @@ class JeuVue:
                 600,
                 60,
             ),
+            self.creer_text_box("Quitter", LONGUEUR // 2, LARGEUR // 2 + 250, 250, 60),
         ]
 
         for index, (rect, text_surface) in enumerate(text_boxes):

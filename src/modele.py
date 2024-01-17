@@ -25,10 +25,10 @@ class JeuModel:
         return self.selected_lvl
 
     def set_selected_lvl(self, value):
-        if value > self.LVL_MAX:
+        if value > self.LVL_MAX + 1:
             self.selected_lvl = 1
         elif value < 1:
-            self.selected_lvl = self.LVL_MAX
+            self.selected_lvl = self.LVL_MAX + 1
         else:
             self.selected_lvl = value
 
@@ -36,10 +36,10 @@ class JeuModel:
         return self.selected_death_box
 
     def set_selected_death_box(self, value):
-        if value > self.LVL_MAX:
+        if value > 3:
             self.selected_death_box = 1
         elif value < 1:
-            self.selected_death_box = 2
+            self.selected_death_box = 3
         else:
             self.selected_death_box = value
 
