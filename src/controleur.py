@@ -25,6 +25,7 @@ class JeuControleur:
             elif event.type == pygame.KEYUP and (self.modele.get_ecran() > 4):
                 if event.key in self.touche_enfoncee:
                     self.touche_enfoncee[event.key] = False
+
             # event des menus
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP and self.modele.get_ecran() == 2:
@@ -85,29 +86,6 @@ class JeuControleur:
             self.traiter_evenements()
 
             # event de jeu
-            # if self.touche_enfoncee[pygame.K_LEFT]:
-            #     self.modele.perso.set_vitesse_x(-15)
-            # if self.touche_enfoncee[pygame.K_RIGHT]:
-            #     self.modele.perso.set_vitesse_x(15)
-            # else:
-            #     self.modele.perso.set_vitesse_x(0)
-
-            # if not self.modele.perso.get_en_saut():
-            #     if self.touche_enfoncee[pygame.K_UP]:
-            #         self.modele.perso.set_en_saut(True)
-            #         self.modele.perso.set_vitesse_saut(
-            #             self.modele.perso.get_hauteur_saut()
-            #         )
-
-            # if self.modele.get_ecran() >= 3 and self.touche_enfoncee[pygame.K_RIGHT]:
-            #     return
-            # if self.modele.get_ecran() >= 3 and self.touche_enfoncee[pygame.K_LEFT]:
-            #     return
-            # else:
-            #     return
-            # if self.modele.get_ecran() >= 3 and self.touche_enfoncee[pygame.K_SPACE]:
-            #     return
-
             self.modele.mise_a_jour()
 
             if self.modele.get_ecran() == 1:

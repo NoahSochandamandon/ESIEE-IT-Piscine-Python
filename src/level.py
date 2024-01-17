@@ -100,7 +100,7 @@ class Niveau:
     def mort_chutte(self):
         player = self.player.sprite
         player_y = player.rect.centery
-        if player_y > 704:
+        if player_y > 1088:
             self.player_life = False
 
     def run(self):

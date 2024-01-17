@@ -2,8 +2,10 @@ import pygame
 import random
 
 TILE_SIZE = 64
-LONGUEUR = 1280
-LARGEUR = 704
+# LONGUEUR = 1280
+# LARGEUR = 704
+LONGUEUR = 1920
+LARGEUR = 1080
 FONT = "./font/8bit16.ttf"
 GAME_NAME = "Plateformer ESIEE-IT"
 
@@ -15,7 +17,7 @@ class JeuModel:
 
         self.ecran = 1  # 1 = démarrage, 2 = selection niveaux, 3 = mort, 4 = victoire, 5 = lvl 1, 6 = lvl 2
         self.selected_lvl = 1  # variable de selection de niveau
-        self.selected_death_box = 1
+        self.selected_death_box = 1  # variable qui permet de connaitre la text box selectionné dans la page de mort et de victoire
         self.score = 0
 
     # setter and getter
