@@ -1,5 +1,6 @@
 import pygame
 from tiles import Tuile
+from endPoint import End_Point
 from modele import TILE_SIZE, LONGUEUR
 from perso import Player
 
@@ -11,14 +12,23 @@ class Niveau:
         self.setup_level(level_data)
         self.world_shift = 0
         self.player_life = True
+        self.victory = False
 
     def get_player_life(self):
         return self.player_life
 
+    def set_player_life(self, value):
         self.player_life = value
+
+    def get_victory(self):
+        return self.victory
+
+    def set_victory(self, value):
+        self.victory = value
 
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
+        self.end = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
 
         for row_index, row in enumerate(layout):
@@ -32,6 +42,9 @@ class Niveau:
                 if cell == "P":
                     player_sprite = Player((x, y))
                     self.player.add(player_sprite)
+                if cell == "E":
+                    end_point = End_Point((x, y), TILE_SIZE)
+                    self.end.add(end_point)
 
     def scroll_x(self):
         player = self.player.sprite
@@ -58,6 +71,12 @@ class Niveau:
                     player.rect.left = sprite.rect.right
                 elif player.direction.x > 0:
                     player.rect.right = sprite.rect.left
+        for sprite in self.end.sprites():
+            if sprite.rect.colliderect(player.rect):
+                if player.direction.x < 0:
+                    self.victory = True
+                elif player.direction.x > 0:
+                    self.victory = True
 
     def vertical_movement_collision(self):
         player = self.player.sprite
@@ -71,6 +90,12 @@ class Niveau:
                 elif player.direction.y < 0:
                     player.direction.y = 0
                     player.rect.top = sprite.rect.bottom
+        for sprite in self.end.sprites():
+            if sprite.rect.colliderect(player.rect):
+                if player.direction.y > 0:
+                    self.victory = True
+                elif player.direction.y < 0:
+                    self.victory = True
 
     def mort_chutte(self):
         player = self.player.sprite
@@ -82,6 +107,8 @@ class Niveau:
         # Cases du niveau
         self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)
+        self.end.update(self.world_shift)
+        self.end.draw(self.display_surface)
         self.scroll_x()
 
         # Player

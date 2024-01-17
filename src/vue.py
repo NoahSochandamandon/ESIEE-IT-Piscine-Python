@@ -68,6 +68,11 @@ class JeuVue:
         if not self.level.get_player_life():
             modele.set_ecran(3)
             modele.set_vivant(False)
+
+        if self.level.get_victory():
+            modele.set_ecran(4)
+            modele.set_vivant(False)
+
         self.level.run()
 
     def initialiser_niveau(self, carte):
@@ -78,6 +83,45 @@ class JeuVue:
         pygame.display.set_caption(GAME_NAME)
 
         texte = "Vous etes mort GG"
+
+        text_boxes = [
+            self.creer_text_box("Reessayer", LONGUEUR // 2, LARGEUR // 2 + 50, 300, 60),
+            self.creer_text_box(
+                "Selection des niveaux",
+                LONGUEUR // 2,
+                LARGEUR // 2 + 150,
+                600,
+                60,
+            ),
+        ]
+
+        for index, (rect, text_surface) in enumerate(text_boxes):
+            pygame.draw.rect(self.ecran, (60, 60, 60), rect)
+            rect_contour = rect.inflate(10, 10)
+            if (index + 1) == modele.get_selected_death_box():
+                pygame.draw.rect(self.ecran, (255, 255, 255), rect_contour, 8)
+            self.ecran.blit(
+                text_surface,
+                (
+                    rect.x + (rect.width - text_surface.get_width()) // 2,
+                    rect.y + (rect.height - text_surface.get_height()) // 2,
+                ),
+            )
+
+        surface_texte = self.police.render(texte, True, self.couleur_texte)
+        position_texte = surface_texte.get_rect(
+            center=(LONGUEUR / 2, LARGEUR / 2 - 150)
+        )
+
+        self.ecran.blit(surface_texte, position_texte)
+
+        pygame.display.update()
+
+    def afficher_screen_victory(self, modele):
+        self.ecran.blit(self.fond, (0, 0))
+        pygame.display.set_caption(GAME_NAME)
+
+        texte = "Et c'est la win, GG"
 
         text_boxes = [
             self.creer_text_box("Reessayer", LONGUEUR // 2, LARGEUR // 2 + 50, 300, 60),

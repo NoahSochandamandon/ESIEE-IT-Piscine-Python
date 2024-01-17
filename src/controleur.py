@@ -35,6 +35,8 @@ class JeuControleur:
                     self.modele.set_ecran(self.modele.get_selected_lvl() + 4)
                 if event.key == pygame.K_SPACE and self.modele.get_ecran() == 1:
                     self.modele.set_ecran(2)
+
+                # ecran de mort
                 if event.key == pygame.K_UP and self.modele.get_ecran() == 3:
                     self.modele.set_selected_death_box(
                         self.modele.get_selected_death_box() - 1
@@ -52,6 +54,28 @@ class JeuControleur:
                 if (
                     event.key == pygame.K_SPACE
                     and self.modele.get_ecran() == 3
+                    and self.modele.get_selected_death_box() == 2
+                ):
+                    self.modele.set_ecran(2)
+
+                # ecran de victoire
+                if event.key == pygame.K_UP and self.modele.get_ecran() == 4:
+                    self.modele.set_selected_death_box(
+                        self.modele.get_selected_death_box() - 1
+                    )
+                if event.key == pygame.K_DOWN and self.modele.get_ecran() == 4:
+                    self.modele.set_selected_death_box(
+                        self.modele.get_selected_death_box() + 1
+                    )
+                if (
+                    event.key == pygame.K_SPACE
+                    and self.modele.get_ecran() == 4
+                    and self.modele.get_selected_death_box() == 1
+                ):
+                    self.modele.set_ecran(self.modele.get_selected_lvl() + 4)
+                if (
+                    event.key == pygame.K_SPACE
+                    and self.modele.get_ecran() == 4
                     and self.modele.get_selected_death_box() == 2
                 ):
                     self.modele.set_ecran(2)
@@ -93,7 +117,7 @@ class JeuControleur:
             elif self.modele.get_ecran() == 3:
                 self.vue.afficher_screen_death(self.modele)
             elif self.modele.get_ecran() == 4:
-                self.vue.afficher_screen_2(self.modele)
+                self.vue.afficher_screen_victory(self.modele)
             elif self.modele.get_ecran() == 5:
                 self.vue.afficher_screen_3(self.modele)
             elif self.modele.get_ecran() == 6:
