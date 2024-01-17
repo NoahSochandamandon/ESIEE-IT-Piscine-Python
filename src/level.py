@@ -10,6 +10,12 @@ class Niveau:
         self.display_surface = surface
         self.setup_level(level_data)
         self.world_shift = 0
+        self.player_life = True
+
+    def get_player_life(self):
+        return self.player_life
+
+        self.player_life = value
 
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
@@ -66,6 +72,12 @@ class Niveau:
                     player.direction.y = 0
                     player.rect.top = sprite.rect.bottom
 
+    def mort_chutte(self):
+        player = self.player.sprite
+        player_y = player.rect.centery
+        if player_y > 704:
+            self.player_life = False
+
     def run(self):
         # Cases du niveau
         self.tiles.update(self.world_shift)
@@ -74,6 +86,7 @@ class Niveau:
 
         # Player
         self.player.update()
+        self.mort_chutte()
         self.horizontal_movement_collision()
         self.vertical_movement_collision()
         self.player.draw(self.display_surface)

@@ -11,6 +11,7 @@ GAME_NAME = "Plateformer ESIEE-IT"
 class JeuModel:
     def __init__(self):
         self.LVL_MAX = 2
+        self.vivant = False
 
         self.ecran = 1  # 1 = démarrage, 2 = selection niveaux, 3 = lvl 1, 4 = lvl 2
         self.selected_lvl = 1  # variable de selection de niveau
@@ -33,6 +34,12 @@ class JeuModel:
 
     def set_ecran(self, value):
         self.ecran = value
+
+    def get_vivant(self):
+        return self.vivant
+
+    def set_vivant(self, value):
+        self.vivant = value
 
     # fonction utiles au jeu
     def ajouter_obstacle(self):

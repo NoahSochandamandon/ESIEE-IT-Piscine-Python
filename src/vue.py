@@ -4,11 +4,6 @@ from map.map_1 import *
 from modele import LONGUEUR, LARGEUR, FONT, GAME_NAME
 import os
 
-# LONGUEUR = 1280
-# LARGEUR = 704
-# FONT = "./font/8bit16.ttf"
-# GAME_NAME = "Plateformer ESIEE-IT"
-
 
 class JeuVue:
     def __init__(self):
@@ -19,7 +14,6 @@ class JeuVue:
         )
         self.police = pygame.font.Font(FONT, 36)
         self.couleur_texte = (255, 255, 255)
-        self.level_1 = Niveau(carte_niveau_1, self.ecran)
 
     # vue des menus
     def afficher_screen_1(self, modele):
@@ -33,7 +27,7 @@ class JeuVue:
 
         self.ecran.blit(surface_texte, position_texte)
 
-        pygame.display.flip()
+        pygame.display.update()
 
     def afficher_screen_2(self, modele):
         self.fond = pygame.transform.scale(
@@ -44,17 +38,18 @@ class JeuVue:
 
         text_boxes = [
             self.creer_text_box(
-                "niveau 1", LONGUEUR // 2 - 100, LARGEUR // 2 - 50, 200, 50
+                "niveau 1", LONGUEUR // 2 - 100, LARGEUR // 2 - 50, 300, 60
             ),
             self.creer_text_box(
-                "niveau 2", LONGUEUR // 2 - 100, LARGEUR // 2 + 50, 200, 50
+                "niveau 2", LONGUEUR // 2 - 100, LARGEUR // 2 + 50, 300, 60
             ),
         ]
 
         for index, (rect, text_surface) in enumerate(text_boxes):
             pygame.draw.rect(self.ecran, (60, 60, 60), rect)
+            rect_contour = rect.inflate(10, 10)
             if (index + 1) == modele.get_selected_lvl():
-                pygame.draw.rect(self.ecran, (255, 255, 255), rect, 8)
+                pygame.draw.rect(self.ecran, (255, 255, 255), rect_contour, 8)
             self.ecran.blit(
                 text_surface,
                 (
@@ -68,10 +63,16 @@ class JeuVue:
     # vue des niveau in game
     def afficher_screen_3(self, modele):
         self.ecran.fill("black")
-        self.level_1.run()
+        if not modele.get_vivant():
+            self.initialiser_niveau(carte_niveau_1)
+            modele.set_vivant(True)
 
-        pygame.display.update()
-        # self.clock.tick(60)
+        if not self.level.get_player_life():
+            modele.set_vivant(False)
+        self.level.run()
+
+    def initialiser_niveau(self, carte):
+        self.level = Niveau(carte, self.ecran)
 
     def creer_text_box(self, texte, x, y, largeur, hauteur):
         rect = pygame.Rect(x, y, largeur, hauteur)
