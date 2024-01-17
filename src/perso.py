@@ -77,6 +77,12 @@ class Player(pygame.sprite.Sprite):
         elif keys[pygame.K_f] and not self.fly:
             self.fly = True
 
+    def get_status(self):
+        if self.direction.x != 0:
+            self.status = "run"
+        else:
+            self.status = "stop"
+
     def apply_gravity(self):
         self.direction.y += self.gravity
         self.rect.y += self.direction.y
@@ -87,3 +93,5 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.get_input()
+        self.get_status()
+        self.animate()
