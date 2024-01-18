@@ -79,7 +79,7 @@ class JeuVue:
         self.level.run()
 
     def afficher_screen_6(self, modele):
-        self.ecran.fill("black")
+        self.ecran.blit(self.image_lvl, (0, 0))
         if not modele.get_vivant():
             self.initialiser_niveau(carte_niveau_2)
             modele.set_vivant(True)
