@@ -10,11 +10,11 @@ class JeuVue:
         pygame.init()
         self.ecran = pygame.display.set_mode((LONGUEUR, LARGEUR))
         self.fond = pygame.transform.scale(
-            pygame.image.load("./sprites/background/wall.png"), (LONGUEUR, LARGEUR)
+            pygame.image.load("./sprites/background/wall.jpg"), (LONGUEUR, LARGEUR)
         )
         self.police = pygame.font.Font(FONT, 36)
         self.couleur_texte = (255, 255, 255)
-        self.image_lvl = pygame.image.load("./sprites/background/game_background.png")
+        self.image_lvl = pygame.image.load("./sprites/background/game_background.jpg")
 
         pygame.mixer.init()
         pygame.mixer.music.set_volume(0.05)
@@ -37,7 +37,7 @@ class JeuVue:
 
     def afficher_screen_2(self, modele):
         self.fond = pygame.transform.scale(
-            pygame.image.load("./sprites/background/wall2.png"), (LONGUEUR, LARGEUR)
+            pygame.image.load("./sprites/background/wall.jpg"), (LONGUEUR, LARGEUR)
         )
         self.ecran.blit(self.fond, (0, 0))
 
@@ -64,7 +64,7 @@ class JeuVue:
 
     # vue des niveau in game
     def afficher_screen_5(self, modele):
-        self.ecran.fill("black")
+        self.ecran.blit(self.image_lvl, (0, 0))
         if not modele.get_vivant():
             self.initialiser_niveau(carte_niveau_1)
             modele.set_vivant(True)
@@ -95,7 +95,13 @@ class JeuVue:
         self.level.run()
 
     def afficher_screen_death(self, modele):
-        self.ecran.blit(self.fond, (0, 0))
+        self.ecran.blit(
+            pygame.transform.scale(
+                pygame.image.load("./sprites/background/loose.jpg"),
+                (LONGUEUR, LARGEUR),
+            ),
+            (0, 0),
+        )
 
         texte = "C'est grave comment t'es trop nul"
 
