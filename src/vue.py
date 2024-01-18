@@ -14,6 +14,8 @@ class JeuVue:
         )
         self.police = pygame.font.Font(FONT, 36)
         self.couleur_texte = (255, 255, 255)
+        self.image_lvl = pygame.image.load("./sprites/background/game_background.png")
+
         pygame.mixer.init()
         pygame.mixer.music.set_volume(0.05)
 
@@ -62,7 +64,10 @@ class JeuVue:
 
     # vue des niveau in game
     def afficher_screen_5(self, modele):
-        self.ecran.fill("black")
+        self.ecran.blit(
+            self.image_lvl,
+            (0, 0),
+        )
         if not modele.get_vivant():
             self.initialiser_niveau(carte_niveau_1)
             modele.set_vivant(True)
