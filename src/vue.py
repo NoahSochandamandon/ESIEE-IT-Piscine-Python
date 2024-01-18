@@ -56,10 +56,10 @@ class JeuVue:
                 ),
             )
 
-        pygame.display.flip()
+        pygame.display.update()
 
     # vue des niveau in game
-    def afficher_screen_3(self, modele):
+    def afficher_screen_5(self, modele):
         self.ecran.fill("black")
         if not modele.get_vivant():
             self.initialiser_niveau(carte_niveau_1)
@@ -75,7 +75,7 @@ class JeuVue:
 
         self.level.run()
 
-    def afficher_screen_4(self, modele):
+    def afficher_screen_6(self, modele):
         self.ecran.fill("black")
         if not modele.get_vivant():
             self.initialiser_niveau(carte_niveau_2)
@@ -98,7 +98,7 @@ class JeuVue:
         self.ecran.blit(self.fond, (0, 0))
         pygame.display.set_caption(GAME_NAME)
 
-        texte = "Vous etes mort GG"
+        texte = "C'est grave comment t'es trop nul"
 
         text_boxes = [
             self.creer_text_box("Reessayer", LONGUEUR // 2, LARGEUR // 2 + 50, 300, 60),
@@ -135,7 +135,13 @@ class JeuVue:
         pygame.display.update()
 
     def afficher_screen_victory(self, modele):
-        self.ecran.blit(self.fond, (0, 0))
+        self.ecran.blit(
+            pygame.transform.scale(
+                pygame.image.load("./sprites/background/victoire.jpg"),
+                (LONGUEUR, LARGEUR),
+            ),
+            (0, 0),
+        )
         pygame.display.set_caption(GAME_NAME)
 
         texte = "Et c'est la win, GG"

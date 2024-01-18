@@ -2,8 +2,6 @@ import pygame
 import random
 
 TILE_SIZE = 64
-# LONGUEUR = 1280
-# LARGEUR = 704
 LONGUEUR = 1920
 LARGEUR = 1080
 FONT = "./font/8bit16.ttf"
@@ -31,6 +29,9 @@ class JeuModel:
             self.selected_lvl = self.LVL_MAX + 1
         else:
             self.selected_lvl = value
+
+    def get_LVL_MAX(self):
+        return self.LVL_MAX
 
     def get_selected_death_box(self):
         return self.selected_death_box
