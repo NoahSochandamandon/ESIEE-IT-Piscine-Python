@@ -14,6 +14,8 @@ class JeuVue:
         )
         self.police = pygame.font.Font(FONT, 36)
         self.couleur_texte = (255, 255, 255)
+        pygame.mixer.init()
+        pygame.mixer.music.set_volume(0.05)
 
     # vue des menus : screen 1 et 2
     def afficher_screen_1(self, modele):
@@ -65,13 +67,12 @@ class JeuVue:
             self.initialiser_niveau(carte_niveau_1)
             modele.set_vivant(True)
 
+        # fonction de la mort du joueur
         if not self.level.get_player_life():
-            modele.set_ecran(3)
-            modele.set_vivant(False)
+            self.player_dead(modele)
 
         if self.level.get_victory():
-            modele.set_ecran(4)
-            modele.set_vivant(False)
+            self.player_win(modele)
 
         self.level.run()
 
@@ -81,19 +82,18 @@ class JeuVue:
             self.initialiser_niveau(carte_niveau_2)
             modele.set_vivant(True)
 
+        # fonction de la mort du joueur
         if not self.level.get_player_life():
-            modele.set_ecran(3)
-            modele.set_vivant(False)
+            self.player_dead(modele)
 
+        # fonction de la victoire du joueur
         if self.level.get_victory():
-            modele.set_ecran(4)
-            modele.set_vivant(False)
+            self.player_win(modele)
 
         self.level.run()
 
     def afficher_screen_death(self, modele):
         self.ecran.blit(self.fond, (0, 0))
-        pygame.display.set_caption(GAME_NAME)
 
         texte = "C'est grave comment t'es trop nul"
 
@@ -184,3 +184,27 @@ class JeuVue:
         rect = pygame.Rect(x - (largeur / 2), y, largeur, hauteur)
         text_surface = self.police.render(texte, True, self.couleur_texte)
         return rect, text_surface
+
+    def launch_music(self, root):
+        pygame.mixer.music.stop()
+        loading_file = ".\\music\\" + root
+        pygame.mixer.music.load(loading_file)
+        pygame.mixer.music.play(loops=0)
+
+    def launch_music_duo(self, root, root2):
+        pygame.mixer.music.stop()
+        loading_file = ".\\music\\" + root
+        pygame.mixer.music.load(loading_file)
+        loading_file = ".\\music\\" + root2
+        pygame.mixer.music.load(loading_file)
+        pygame.mixer.music.play(loops=0)
+
+    def player_dead(self, modele):
+        modele.set_ecran(3)
+        self.launch_music("loose.mp3")
+        modele.set_vivant(False)
+
+    def player_win(self, modele):
+        modele.set_ecran(4)
+        self.launch_music("victory.mp3")
+        modele.set_vivant(False)

@@ -41,6 +41,7 @@ class JeuControleur:
                     == self.modele.get_LVL_MAX() + 1
                 ):
                     self.modele.set_ecran(self.modele.get_selected_lvl() + 4)
+                    self.vue.launch_music_duo("spawn.mp3", "main.mp3")
                 elif (
                     event.key == pygame.K_SPACE
                     and self.modele.get_ecran() == 2

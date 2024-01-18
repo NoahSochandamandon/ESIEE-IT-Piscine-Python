@@ -5,7 +5,7 @@ TILE_SIZE = 64
 LONGUEUR = 1920
 LARGEUR = 1080
 FONT = "./font/8bit16.ttf"
-GAME_NAME = "Plateformer ESIEE-IT"
+GAME_NAME = "L'envolée Educative"
 
 
 class JeuModel:
