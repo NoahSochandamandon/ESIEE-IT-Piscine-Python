@@ -37,7 +37,8 @@ class JeuControleur:
                 elif (
                     event.key == pygame.K_SPACE
                     and self.modele.get_ecran() == 2
-                    and not self.modele.get_LVL_MAX() + 1
+                    and not self.modele.get_selected_lvl()
+                    == self.modele.get_LVL_MAX() + 1
                 ):
                     self.modele.set_ecran(self.modele.get_selected_lvl() + 4)
                 elif (
@@ -130,8 +131,6 @@ class JeuControleur:
                 self.vue.afficher_screen_5(self.modele)
             elif self.modele.get_ecran() == 6:
                 self.vue.afficher_screen_6(self.modele)
-            # print(self.modele.get_ecran())
-            # print(self.modele.get_selected_lvl())
 
             pygame.display.update()
             self.clock.tick(60)

@@ -15,7 +15,7 @@ class JeuVue:
         self.police = pygame.font.Font(FONT, 36)
         self.couleur_texte = (255, 255, 255)
 
-    # vue des menus
+    # vue des menus : screen 1 et 2
     def afficher_screen_1(self, modele):
         self.ecran.blit(self.fond, (0, 0))
         pygame.display.set_caption(GAME_NAME)
@@ -90,9 +90,6 @@ class JeuVue:
             modele.set_vivant(False)
 
         self.level.run()
-
-    def initialiser_niveau(self, carte):
-        self.level = Niveau(carte, self.ecran)
 
     def afficher_screen_death(self, modele):
         self.ecran.blit(self.fond, (0, 0))
@@ -179,6 +176,9 @@ class JeuVue:
         self.ecran.blit(surface_texte, position_texte)
 
         pygame.display.update()
+
+    def initialiser_niveau(self, carte):
+        self.level = Niveau(carte, self.ecran)
 
     def creer_text_box(self, texte, x, y, largeur, hauteur):
         rect = pygame.Rect(x - (largeur / 2), y, largeur, hauteur)
