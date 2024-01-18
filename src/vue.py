@@ -64,10 +64,7 @@ class JeuVue:
 
     # vue des niveau in game
     def afficher_screen_5(self, modele):
-        self.ecran.blit(
-            self.image_lvl,
-            (0, 0),
-        )
+        self.ecran.fill("black")
         if not modele.get_vivant():
             self.initialiser_niveau(carte_niveau_1)
             modele.set_vivant(True)
