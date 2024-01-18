@@ -34,7 +34,11 @@ class JeuControleur:
                     self.modele.set_selected_lvl(self.modele.get_selected_lvl() - 1)
                 elif event.key == pygame.K_DOWN and self.modele.get_ecran() == 2:
                     self.modele.set_selected_lvl(self.modele.get_selected_lvl() + 1)
-                elif event.key == pygame.K_SPACE and self.modele.get_ecran() == 2:
+                elif (
+                    event.key == pygame.K_SPACE
+                    and self.modele.get_ecran() == 2
+                    and not self.modele.get_LVL_MAX() + 1
+                ):
                     self.modele.set_ecran(self.modele.get_selected_lvl() + 4)
                 elif (
                     event.key == pygame.K_SPACE
