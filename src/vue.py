@@ -103,7 +103,7 @@ class JeuVue:
             (0, 0),
         )
 
-        texte = "C'est grave comment t'es trop nul"
+        texte = "Ca sent le redoublement ici"
 
         text_boxes = [
             self.creer_text_box("Reessayer", LONGUEUR // 2, LARGEUR // 2 + 50, 300, 60),
@@ -149,7 +149,7 @@ class JeuVue:
         )
         pygame.display.set_caption(GAME_NAME)
 
-        texte = "Et c'est la win, GG"
+        texte = "Respect pour ton diplome"
 
         text_boxes = [
             self.creer_text_box("Reessayer", LONGUEUR // 2, LARGEUR // 2 + 50, 300, 60),
